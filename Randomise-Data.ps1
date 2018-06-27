@@ -89,7 +89,7 @@ Function Randomise-Data {
                 }
                 ELSEIF ($curVal[$i] -cmatch '[a-z]') {
                     Write-Debug -Message "CURRENT CHAR = LOWER"
-                    # GENERATE RANDOM SINGLE UPPERCASE CHARACTER
+                    # GENERATE RANDOM SINGLE LOWERCASE CHARACTER
                     $newVal += [char](97..122 | Get-Random)
                 }
                 Write-Debug -Message ("REPLACING " + $curVal[$i] + " WITH " + $newVal[-1])
