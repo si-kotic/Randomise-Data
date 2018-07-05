@@ -101,8 +101,18 @@ Function Randomise-Data {
             }
         }
     }
-    $curXML.SelectNodes($exclude) | Foreach-Object {
-        $_.InnerText = $excludedVal
-    }
+	IF ($excludedVal -is [Array]) {
+		$totalExclusions = $excludedVal.Length
+		$curIndex = 0
+	    $curXML.SelectNodes($exclude) | Foreach-Object {
+	        $_.InnerText = $excludedVal[$curIndex]
+			$curIndex++
+	    }
+	}
+	ELSE {
+		$curXML.SelectNodes($exclude) | Foreach-Object {
+	    $_.InnerText = $excludedVal
+	    }
+	}
     $curXML.Save($Path2XML)
 }
