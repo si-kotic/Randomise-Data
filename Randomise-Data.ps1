@@ -49,7 +49,8 @@ Randomise-Data -Path2XML "C:\path\to\XML\File.xml" -Exclude "/Globus/TxnDesc"
 Function Randomise-Data {
     Param (
         [String]$Path2XML,
-        [String]$Exclude
+        [String]$Exclude,
+		[Switch]$ShittyXML
     )
 
     IF (!(Test-Path $Path2XML)) {
@@ -96,9 +97,7 @@ Function Randomise-Data {
             }
             Write-Debug -Message ("newVal = " + $newVal)
             # NEED TO REPLACE VALUE IN TAG WITH newVal
-            $curXML.SelectNodes("//*/"+$parent) | Foreach-Object {
-                $_.InnerText = $newVal
-            }
+			$_.InnerText = $newVal
         }
     }
 	IF ($excludedVal -is [Array]) {
