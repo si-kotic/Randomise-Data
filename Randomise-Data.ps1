@@ -1,4 +1,4 @@
-<#
+﻿<#
 
 .SYNOPSIS
 
@@ -63,7 +63,7 @@ Function Randomise-Data {
 
     $curXML = [XML](Get-Content $Path2XML)
     $excludedVal = $curXML.SelectNodes($Exclude)."#text"
-    $curXML.Globus.SelectNodes("//*/text()") | Foreach-Object {
+    $curXML.SelectNodes("//*/text()") | Foreach-Object {
         $parent = $_.ParentNode.Name
         $curVal = $_.Value
         $length = $_.Length
@@ -96,12 +96,12 @@ Function Randomise-Data {
             }
             Write-Debug -Message ("newVal = " + $newVal)
             # NEED TO REPLACE VALUE IN TAG WITH newVal
-            $curXML.Globus.SelectNodes("//*/"+$parent) | Foreach-Object {
+            $curXML.SelectNodes("//*/"+$parent) | Foreach-Object {
                 $_.InnerText = $newVal
             }
         }
     }
-    $curXML.Globus.SelectNodes($exclude) | Foreach-Object {
+    $curXML.SelectNodes($exclude) | Foreach-Object {
         $_.InnerText = $excludedVal
     }
     $curXML.Save($Path2XML)
