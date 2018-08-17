@@ -53,6 +53,9 @@ Function Randomise-Data {
 		[Switch]$ShittyXML
     )
 
+    IF ($Exclude) {
+        $Exclude.Replace("\","/")
+    }
     IF (!(Test-Path $Path2XML)) {
         Write-Host "SUPPLIED FILEPATH DOES NOT RESOLVE TO A VALID XML FILE!"
         Break;
