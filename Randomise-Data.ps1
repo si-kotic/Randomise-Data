@@ -54,7 +54,7 @@ Function Randomise-Data {
     )
 
     IF ($Exclude) {
-        $Exclude.Replace("\","/")
+        $Exclude = $Exclude.Replace("\","/")
     }
     IF (!(Test-Path $Path2XML)) {
         Write-Host "SUPPLIED FILEPATH DOES NOT RESOLVE TO A VALID XML FILE!"
