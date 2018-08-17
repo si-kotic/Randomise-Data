@@ -60,6 +60,9 @@ Function Randomise-Data {
         Write-Host "SUPPLIED FILEPATH DOES NOT RESOLVE TO A VALID XML FILE!"
         Break;
     }
+    ELSE {
+        $Path2XML = (Resolve-Path -Path $Path2XML).Path
+    }
     IF ($Exclude -and !(Select-XML -Path $Path2XML -XPath $Exclude)) {
         Write-Host "SUPPLIED XPATH DOES NOT EXIST WITHIN THE SUPPLIED XML FILE!"
         Break;
