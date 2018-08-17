@@ -69,7 +69,9 @@ Function Randomise-Data {
     }
 
     $curXML = [XML](Get-Content $Path2XML)
-    $excludedVal = $curXML.SelectNodes($Exclude)."#text"
+    IF ($Exclude) {
+        $excludedVal = $curXML.SelectNodes($Exclude)."#text"
+    }
     $curXML.SelectNodes("//*/text()") | Foreach-Object {
         $parent = $_.ParentNode.Name
         $curVal = $_.Value
@@ -114,7 +116,7 @@ Function Randomise-Data {
 			$curIndex++
 	    }
 	}
-	ELSE {
+	ELSEIF ($Exclude) {
 		$curXML.SelectNodes($exclude) | Foreach-Object {
 	    $_.InnerText = $excludedVal
 	    }
